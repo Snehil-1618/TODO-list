@@ -14,61 +14,60 @@
 </head>
 
 <body>
-
-
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
-        </nav>
+        </div>
+    </nav> -->
+    <div class="container">
         <div class="mb-3 my-4">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">Add your Title</div>
+            <input type="text" class="form-control" placeholder="Enter your Title" id="title" aria-describedby="emailHelp">
+            <!-- <div id="emailHelp" class="form-text">Add your title here mf.</div> -->
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description">
+            <textarea class="form-control" name="description" id="description" cols="30" rows="4" placeholder="Describe the work to be done"></textarea>
+            <!-- <input type="text" class="form-control" id="description"> -->
         </div>
 
-        <button type="submit" class="btn btn-primary" id="adD">ADD</button>
+        <button type="submit" class="btn btn-primary" id="add">Add</button>
         <table class="table my-4" id="table">
             <thead>
                 <tr>
@@ -84,7 +83,7 @@
                     <td></td>
                     <!-- <td><button class="btn btn-sm btn-primary">Delete</button></td> -->
                     <!-- <td><button class="btn btn-sm btn-primary">Done</button></td> -->
-                    
+
                 </tr>
             </tbody>
         </table>
@@ -93,6 +92,10 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
     <script>
+        window.onload = () => {
+            localStorage.clear();
+            console.log("All data cleared.")
+        }
         function update() {
             tit = document.getElementById("title").value;
             desc = document.getElementById("description").value;
@@ -101,37 +104,37 @@
             if (localStorage.getItem('itemsJSON') == null) {//to make a new object of string in local storage for the given input
                 itemsJSONarray = [];
                 itemsJSONarray.push([tit, desc]);
-                localStorage.setItem('itemsJSON',JSON.stringify(itemsJSONarray));
+                localStorage.setItem('itemsJSON', JSON.stringify(itemsJSONarray));
             }
-            else{
-                jsonstr=localStorage.getItem('itemsJSON');
-                itemsJSONarray=JSON.parse(jsonstr);
+            else {
+                jsonstr = localStorage.getItem('itemsJSON');
+                itemsJSONarray = JSON.parse(jsonstr);
                 itemsJSONarray.push([tit, desc]);
-                localStorage.setItem('itemsJSON',JSON.stringify(itemsJSONarray));
+                localStorage.setItem('itemsJSON', JSON.stringify(itemsJSONarray));
             }
             //table update
-            let str=""; 
-            let tbody=document.getElementById("tbody");
-            itemsJSONarray.forEach((element,index) => {
-                str+=`
+            let str = "";
+            let tbody = document.getElementById("tbody");
+            itemsJSONarray.forEach((element, index) => {
+                str += `
                 <tr id = "${index}">
                     <td>${element[0]}</td>
                     <td>${element[1]}</td>
-                    <td><button class="btn btn-sm btn-primary" onclick ="deleted(${index})">Delete</button></td>
-                    <td><button class="btn btn-sm btn-primary DONE" onclick="done(${index})">Done</button></td>
+                    <td><button class="btn btn-sm btn-danger" onclick ="deleted(${index})">Delete</button></td>
+                    <td><button class="btn btn-sm btn-success DONE" onclick="done(${index})">Done</button></td>
                 </tr>
                 `
-            tbody.innerHTML=str;
+                tbody.innerHTML = str;
             });
-        } 
-        add = document.getElementById("adD");
-        add.addEventListener("click", update);
-    
-        function deleted(ie){
-            document.getElementById(ie).innerHTML="";
         }
-        function done(ie){
-            document.getElementsByClassName("DONE")[ie].innerHTML="✔️";
+        add = document.getElementById("add");
+        add.addEventListener("click", update);
+
+        function deleted(ie) {
+            document.getElementById(ie).innerHTML = "";
+        }
+        function done(ie) {
+            document.getElementsByClassName("DONE")[ie].innerHTML = "✔️";
         }
     </script>
 
